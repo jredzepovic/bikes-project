@@ -61,11 +61,13 @@
   },
   "dependencies": {
     "@ngx-loading-bar/http": "^2.0.0",
+    "@types/jspdf": "^1.1.31",
     "angular-loading-bar": "^0.9.0",
     "angular2-flash-messages": "^2.0.5",
     "angular2-jwt": "^0.2.3",
     "angular2-universal": "^2.1.0-rc.1",
     "fast-sha256": "^1.1.0",
+    "jspdf": "^1.4.0",
     "ngx-toastr": "^8.5.1",
     "sha256": "^0.2.0",
     "text-encoder": "0.0.3"

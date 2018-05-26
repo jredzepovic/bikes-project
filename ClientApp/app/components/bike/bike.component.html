@@ -1,34 +1,40 @@
 <div>
-    <p>Ime: {{name}}</p>
-    <button *ngIf="authService.loggedIn() && editable" style="float: right;" (click)="onEdit(id)">Uredi</button>
-    <button *ngIf="authService.loggedIn() && editable" style="float: right;" (click)="onDelete()">Ukloni</button>
-    <p>Veličina gume: {{tireSize}}</p>
-    <p>Brzine: {{speeds}}</p>
-    <p>Težina: {{weight}} g</p>
-    <p>Boja: {{color}}</p>
-    <p>Opis: {{description}}</p>
-    <p>Cijena: {{price}}</p>
-    <p>Županija: {{county}}</p>
-    <p>Stanje: {{condition}}</p>
-    <p>Tip: {{type}}</p>
-    <hr>
-    <label>Tip oglasa</label>
-    <ul>
-        <li *ngFor="let adType of adTypes">{{adType.name}}</li>
-    </ul>
-    <hr>
-    <label>Dodatna oprema</label>
-    <ul>
-        <div>
-            <li *ngFor="let eq of addEq" style="margin-top: 1%">
-                Ime: {{eq.name}}, Opis: {{eq.description}}, Količina: {{eq.amount}}
-                <button *ngIf="authService.loggedIn() && editable" (click)="onEditAddEq(eq.id)">Uredi</button>
-                <button *ngIf="authService.loggedIn() && editable" (click)="onDeleteAddEq(eq.id)">Ukloni</button>
-        </div>
-    </ul>
+    <div style="margin-top: 1%">
+        <button *ngIf="authService.loggedIn() && editable" style="float: right;" (click)="onEdit(id)">Uredi</button>
+        <button *ngIf="authService.loggedIn() && editable" style="float: right;" (click)="onDelete()">Ukloni</button>
+        <button style="float: right;" onclick="toPdf()">Izvoz u PDF</button>
+    </div>
+    <div id="mainData">
+        <p>Ime: {{name}}</p>
+        <p>Veličina gume: {{tireSize}}</p>
+        <p>Brzine: {{speeds}}</p>
+        <p>Težina: {{weight}} g</p>
+        <p>Boja: {{color}}</p>
+        <p>Opis: {{description}}</p>
+        <p>Cijena: {{price}}</p>
+        <p>Županija: {{county}}</p>
+        <p>Stanje: {{condition}}</p>
+        <p>Tip: {{type}}</p>
+        <hr>
+        <label>Tip oglasa</label>
+        <ul>
+            <li *ngFor="let adType of adTypes">{{adType.name}}</li>
+        </ul>
+        <hr>
+        <label>Dodatna oprema</label>
+        <ul>
+            <div>
+                <li *ngFor="let eq of addEq" style="margin-top: 1%">
+                    Ime: {{eq.name}}, Opis: {{eq.description}}, Količina: {{eq.amount}}
+                    <button *ngIf="authService.loggedIn() && editable" (click)="onEditAddEq(eq.id)">Uredi</button>
+                    <button *ngIf="authService.loggedIn() && editable" (click)="onDeleteAddEq(eq.id)">Ukloni</button>
+                </li>
+            </div>
+        </ul>
+    </div>
 </div>
 <hr>
-<div>
+<div id="person">
     <p>Nudi: {{user.name}}</p>
     <p>Email: {{user.email}}</p>
     <p>Telefon: {{user.phone}}</p>
