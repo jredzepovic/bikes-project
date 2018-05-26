@@ -1,1 +1,21 @@
-<h2>{{email}}</h2>
+<div>
+    <p>Ime i prezime: {{name}}</p>
+    <button style="float: right;" (click)="onAdd()">Dodaj oglas</button>
+    <p>OIB: {{oib}}</p>
+    <p>Telefon: {{phone}}</p>
+    <p>Mobitel: {{cellPhone}}</p>
+    <p>Email: {{email}}</p>
+    <p>Adresa: {{address}}</p>
+    <p>Županija: {{county}}</p>
+    <p>Broj oglasa: {{adverts.length}}</p>
+    <div class="bikes">
+        <button (click)="onPrev()">Prethodni</button>
+        <button (click)="onNext()">Sljedeći</button>
+        <ul>
+            <li *ngFor="let ad of advertsToShow" class="list-group-item">
+                {{ ad.name }}, {{ ad.price }} kn, Broj dodatne opreme: {{ ad.additionalEquipment.length }}
+                <button style="float: right;" (click)="onDetails(ad.id)">Detalji</button>
+            </li>
+        </ul>
+    </div>
+</div>

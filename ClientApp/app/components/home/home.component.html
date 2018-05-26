@@ -1,1 +1,35 @@
-hello from home
+<div>
+    <p>Odabir</p>
+    <label>Županija</label>
+    <select [(ngModel)]="county" name="county" class="form-control">
+        <option *ngFor="let x of counties" [value]="x">{{x}}</option>
+    </select>
+    <label>Stanje</label>
+    <select [(ngModel)]="condition" name="condition" class="form-control">
+        <option *ngFor="let x of conditions" [value]="x">{{x}}</option>
+    </select>
+    <label>Tip bicikla</label>
+    <select [(ngModel)]="type" name="type" class="form-control">
+        <option *ngFor="let x of types" [value]="x">{{x}}</option>
+    </select>
+    <label>Tip oglasa</label>
+    <select [(ngModel)]="typeAd" name="typeAd" class="form-control">
+        <option *ngFor="let x of typesAd" [value]="x">{{x}}</option>
+    </select>
+    <button style="margin-top: 1%" (click)="onFilter()">Odaberi</button>
+</div>
+<hr>
+<div>
+    <div class="row">
+        <div *ngFor="let ad of advertsToShow" class="col-sm-6" style="padding-top: 1%">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ad.name}}: {{ad.price}} kn</h5>
+                    <p class="card-text">Opis: {{ad.description}}</p>
+                    <button (click)="onDetails(ad.id)">Detalji</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<hr>

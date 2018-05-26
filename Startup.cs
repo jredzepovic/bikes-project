@@ -32,6 +32,11 @@ namespace bikes_project
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<ICountyService, CountyService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IBikeTypeService, BikeTypeService>();
+            services.AddScoped<IBikeConditionService, BikeConditionService>();
+            services.AddScoped<IAdvertTypeService, AdvertTypeService>();
+            services.AddScoped<IAdvertService, AdvertService>();
+            services.AddScoped<IAdditionalEquipmentService, AdditionalEquipmentService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

@@ -25,6 +25,15 @@ export class AuthService {
             .map(res => res.json());
     }
 
+    getUserID() {
+        let headers = new Headers();
+        this.loadToken();
+        headers.append('Content-Type', 'application/json');
+        headers.append('Authorization', 'Bearer ' + this.authToken);
+        return this.http.get('api/user/getuserid', { headers: headers })
+            .map(res => res.json());
+    }
+
     storeUserData(token: string, user: string) {
         localStorage.setItem('id_token', token);
         localStorage.setItem('user', user);

@@ -1,0 +1,81 @@
+<h2 class="page-header">Uredi bicikl</h2>
+<form>
+    <div class="form-group">
+        <label>Ime</label>
+        <input type="text" [(ngModel)]="name" name="name" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Veličina guma</label>
+        <input type="text" [(ngModel)]="tireSize" name="tireSize" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Brzine</label>
+        <input type="text" [(ngModel)]="speeds" name="speeds" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Težina</label>
+        <input type="text" [(ngModel)]="weight" name="weight" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Boja</label>
+        <input type="text" [(ngModel)]="color" name="color" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Opis</label>
+        <input type="text" [(ngModel)]="description" name="description" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Stanje</label>
+        <select [(ngModel)]="condition" name="condition" class="form-control">
+            <option *ngFor="let x of conditions" [value]="x">{{x}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Tip</label>
+        <select [(ngModel)]="type" name="type" class="form-control">
+            <option *ngFor="let x of types" [value]="x">{{x}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Županija</label>
+        <select [(ngModel)]="county" name="county" class="form-control">
+            <option *ngFor="let x of counties" [value]="x">{{x}}</option>
+        </select>
+    </div>
+    <div class="form-group">
+        <label>Tip oglasa</label>
+        <br>
+        <input type="checkbox" [(ngModel)]="sale" name="sale">Prodaja
+        <input type="checkbox" [(ngModel)]="rent" name="rent">Iznajmljivanje
+    </div>
+    <div class="form-group">
+        <label>Cijena</label>
+        <input type="text" [(ngModel)]="price" name="price" class="form-control">
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-sm" style="border: groove">
+            <label>Dodatna oprema</label>
+            <div class="form-group">
+                <label>Ime</label>
+                <input type="text" [(ngModel)]="addEqName" name="addEqName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Opis</label>
+                <input type="text" [(ngModel)]="addEqDesc" name="addEqDesc" class="form-control">
+            </div>
+            <div class="form-group">
+                <label>Količina</label>
+                <input type="text" [(ngModel)]="addEqAmount" name="addEqAmount" class="form-control">
+            </div>
+            <button style="margin-bottom: 1%" (click)="addEqSubmit()">Dodaj opremu</button>
+        </div>
+        <div class="col-sm" style="height: 335px; overflow: auto; overflow-y: scroll;">
+            <ul>
+                <li *ngFor="let x of addEq; let i = index" class="list-group-item">{{x.name}} <button style="float: right" (click)="rmAddEq(i)">Ukloni</button></li> 
+            </ul>
+        </div>
+    </div>
+    <hr>
+    <input type="submit" value="Spremi" style="margin-bottom: 1%; margin-top: 1%;" (click)="onAddSubmit()">
+</form>

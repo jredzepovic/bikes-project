@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
             if (data.success) {
                 this.authService.storeUserData(data.token, data.user);
                 this.flashMessage.show('Sad ste ulogirani!', { cssClass: 'alert-success', timeout: 5000 });
-                this.router.navigate(['/profile']);
+                this.router.navigate(['/home']);
             } else {
                 this.flashMessage.show("Pogrešni podaci za prijavu!", { cssClass: 'alert-danger', timeout: 5000 });
                 this.router.navigate(['/login']);

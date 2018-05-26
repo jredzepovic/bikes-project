@@ -6,5 +6,6 @@ namespace bikes_project.Services
     public partial interface IUserService
     {
         User GetUserByEmail(string email);
+        User GetUserByID(int id);
     }
 }
