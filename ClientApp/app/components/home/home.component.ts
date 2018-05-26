@@ -51,6 +51,12 @@ export class HomeComponent implements OnInit {
     }
 
     onFilter() {
-        // this.advertsToShow = this.adverts.filter(ad => ad.county)
+        this.advertsToShow = this.adverts.filter(ad => ad.county == this.county && ad.condition == this.condition
+            && ad.type == this.type);
+        if (this.typeAd == "Prodaja") {
+            this.advertsToShow = this.advertsToShow.filter(ad => ad.sale);
+        } else {
+            this.advertsToShow = this.advertsToShow.filter(ad => ad.rent);
+        }
     }
 }

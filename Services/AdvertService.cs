@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using bikes_project.Models;
 using bikes_project.Data;
 using bikes_project.ViewModels;
@@ -11,14 +12,23 @@ namespace bikes_project.Services
     public class AdvertService : IAdvertService
     {
         private readonly IUnitOfWork _unitOfWork;
+        private readonly IEmailService _emailService;
+        private readonly IConfiguration _configuration;
 
-        public AdvertService(IUnitOfWork unitOfWork)
+        public AdvertService(IUnitOfWork unitOfWork,
+            IEmailService emailService,
+            IConfiguration configuration)
         {
             this._unitOfWork = unitOfWork;
+            this._emailService = emailService;
+            this._configuration = configuration;
         }
 
         public void AddAdvert(AddAdvertModel model, User user)
         {
+            // this is temporary email, only for demo
+            var email = _configuration["Mail:Target"];
+
             var bike = new Bike()
             {
                 Name = model.Name,
@@ -56,6 +66,14 @@ namespace bikes_project.Services
                 _unitOfWork.BikeAdvertTypeRepository.Insert(advertType);
             }
 
+            try
+            {
+                _emailService.SendAdvertAddEmail(email, bike);
+            }
+            catch (Exception)
+            {
+                //
+            }
             _unitOfWork.Save();
         }
 
@@ -142,7 +160,14 @@ namespace bikes_project.Services
 
         public ICollection<Bike> GetAllAdverts()
         {
-            return _unitOfWork.BikeRepository.Table.ToList();
+            return _unitOfWork.BikeRepository.Table.
+                Include(bike => bike.IdBikeTypeNavigation).
+                Include(bike => bike.IdCountyNavigation).
+                Include(bike => bike.IdBikeConditionNavigation).
+                Include(bike => bike.AdditionalEquipment).
+                Include(bike => bike.IdUserNavigation).
+                    Include(bike => bike.BikeAdvertType).ThenInclude(type => type.IdAdvertTypeNavigation)
+                .ToList();
         }
     }
 }

@@ -37,6 +37,7 @@ namespace bikes_project
             services.AddScoped<IAdvertTypeService, AdvertTypeService>();
             services.AddScoped<IAdvertService, AdvertService>();
             services.AddScoped<IAdditionalEquipmentService, AdditionalEquipmentService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             .AddJwtBearer(options =>

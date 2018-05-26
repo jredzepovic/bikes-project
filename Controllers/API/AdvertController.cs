@@ -183,7 +183,23 @@ namespace bikes_project.Controllers
         {
             try
             {
-                return Json(new { data = _advertService.GetAllAdverts() });
+                var ads = _advertService.GetAllAdverts().Select(ad => new
+                {
+                    Id = ad.Id,
+                    Name = ad.Name,
+                    Description = ad.Description,
+                    Price = ad.Price,
+                    County = ad.IdCountyNavigation.Name,
+                    Type = ad.IdBikeTypeNavigation.Name,
+                    Condition = ad.IdBikeConditionNavigation.Name,
+                    AdvertTypes = ad.BikeAdvertType.Select(type => new
+                    {
+                        Name = type.IdAdvertTypeNavigation.Name
+                    }),
+                    Sale = ad.BikeAdvertType.Where(t => t.IdAdvertTypeNavigation.Name == "Prodaja").Count() > 0,
+                    Rent = ad.BikeAdvertType.Where(t => t.IdAdvertTypeNavigation.Name == "Iznajmljivanje").Count() > 0
+                }).ToList();
+                return Json(new { data = ads });
             }
             catch (System.Exception)
             {
